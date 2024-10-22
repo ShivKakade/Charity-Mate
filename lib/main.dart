@@ -233,7 +233,6 @@ class _DropdownMenuWithBorderState extends State<DropdownMenuWithBorder> {
       child: DropdownButton<String>(
         value: dropdownValue,
         isExpanded: true,
-        icon: const SizedBox.shrink(),
         elevation: 16,
         style: const TextStyle(
           color: Colors.black,
