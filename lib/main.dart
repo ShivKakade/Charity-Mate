@@ -5,6 +5,8 @@ void main() {
   runApp(const MyApp());
 }
 
+String user_type = ""; // Store the user type
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -17,8 +19,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String selectedUserType = user_type; // Track the selected user type
 
   @override
   Widget build(BuildContext context) {
@@ -140,11 +148,28 @@ class HomePage extends StatelessWidget {
 
   Widget _buildDropdownMenu() {
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: 35,
-        vertical: 10,
+      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
+      child: DropdownMenuWithBorder(
+        onUserTypeSelected: (value) {
+          setState(() {
+            selectedUserType = value;
+          });
+        },
       ),
-      child: const DropdownMenuWithBorder(),
+    );
+  }
+
+  Widget _buildSelectedUserTypeText() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        'Selected User Type: $selectedUserType',
+        style: const TextStyle(
+          fontSize: 20,
+          fontStyle: FontStyle.italic,
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 
@@ -184,7 +209,9 @@ class HomePage extends StatelessWidget {
 }
 
 class DropdownMenuWithBorder extends StatefulWidget {
-  const DropdownMenuWithBorder({super.key});
+  final Function(String) onUserTypeSelected;
+
+  const DropdownMenuWithBorder({super.key, required this.onUserTypeSelected});
 
   @override
   State<DropdownMenuWithBorder> createState() => _DropdownMenuWithBorderState();
@@ -205,57 +232,36 @@ class _DropdownMenuWithBorderState extends State<DropdownMenuWithBorder> {
       ),
       child: DropdownButton<String>(
         value: dropdownValue,
-        isExpanded: true, // Make the button take the full width
-        icon: const SizedBox.shrink(), // Hide the default icon
+        isExpanded: true,
+        icon: const SizedBox.shrink(),
         elevation: 16,
         style: const TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontFamily: 'BonaNovaSC',
-            fontStyle: FontStyle.italic),
+          color: Colors.black,
+          fontSize: 20,
+          fontFamily: 'BonaNovaSC',
+          fontStyle: FontStyle.italic,
+        ),
         dropdownColor: const Color(0xFFADC9F4),
         borderRadius: BorderRadius.circular(30),
-        underline: Container(), // Remove underline
+        underline: Container(),
         onChanged: (String? newValue) {
           setState(() {
             dropdownValue = newValue!;
+            user_type = dropdownValue;
+            print(user_type);
           });
-        },
-        selectedItemBuilder: (BuildContext context) {
-          return list.map((String value) {
-            return Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.spaceBetween, // Icon at the end
-              children: <Widget>[
-                Expanded(
-                  child: Center(
-                    // Center-align text
-                    child: Text(
-                      value,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'BonaNovaSC',
-                      ),
-                    ),
-                  ),
-                ),
-                const Icon(Icons.arrow_drop_down,
-                    color: Colors.black), // Custom icon
-              ],
-            );
-          }).toList();
         },
         items: list.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Center(
-              // Center-align text inside dropdown items
               child: Text(
                 value,
                 style: const TextStyle(
-                    fontSize: 20,
-                    fontFamily: 'BonaNovaSC',
-                    fontStyle: FontStyle.italic),
+                  fontSize: 20,
+                  fontFamily: 'BonaNovaSC',
+                  fontStyle: FontStyle.italic,
+                ),
               ),
             ),
           );
