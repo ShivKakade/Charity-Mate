@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "394723749868",
+    "project_id": "charity-bbc90",
+    "storage_bucket": "charity-bbc90.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394723749868:android:9fe94645b518b8af6c1ac9",
+        "android_client_info": {
+          "package_name": "cloud.shivkakade.charitymate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtUcn4IybyXa5b4FMb4MajBQS6eJaCjy8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

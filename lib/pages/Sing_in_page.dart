@@ -1,3 +1,5 @@
+import 'package:charitymate/main.dart';
+import 'package:charitymate/pages/homeScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'Register_page.dart';
@@ -9,7 +11,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'),
+        title:const  Text('Sign In'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -19,7 +21,7 @@ class SignInPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
-                decoration: InputDecoration(
+                decoration:const  InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
                 ),
@@ -30,10 +32,10 @@ class SignInPage extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+             const  SizedBox(height: 16),
               TextFormField(
                 obscureText: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
                 ),
@@ -44,15 +46,16 @@ class SignInPage extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    // Perform sign-in logic
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Signing in...')),
-                    );
-                  }
+
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                  {
+                    return Home();
+                 
+                  }));
+                 
                 },
                 child: Text('Sign In'),
               ),

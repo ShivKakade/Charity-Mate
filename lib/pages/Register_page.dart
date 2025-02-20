@@ -1,3 +1,4 @@
+import 'package:charitymate/pages/Sing_in_page.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -157,6 +158,10 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
+                     Navigator.of(context).push(MaterialPageRoute(builder: (context)
+                  {
+                    return SignInPage();
+                  }));
                     if (_formKey.currentState!.validate()) {
                       // Perform registration logic
                       ScaffoldMessenger.of(context).showSnackBar(
